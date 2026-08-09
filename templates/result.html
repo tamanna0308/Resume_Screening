@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Prediction Result</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Resume Screening Result</h1>
+
+    <!-- Match Percentage -->
+
+    <h2>
+
+        Resume Match Score
+
+    </h2>
+
+    <div class="score">
+
+        {{ score }} %
+
+    </div>
+
+    <!-- Recommendation -->
+
+    <h2>
+
+        Recommendation
+
+    </h2>
+
+    <div class="recommendation">
+
+        {{ recommendation }}
+
+    </div>
+
+    <br>
+
+    <a href="/">
+
+        <button>
+
+            Check Another Resume
+
+        </button>
+
+    </a>
+
+</div>
+
+</body>
+
+</html>

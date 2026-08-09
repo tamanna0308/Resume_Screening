@@ -1,0 +1,78 @@
+
+
+    color:#444;
+
+}
+
+
+/* ===========================
+   File Upload Box
+=========================== */
+
+input[type=file]{
+
+    padding:10px;
+
+}
+
+
+/* ===========================
+   Button
+=========================== */
+
+button{
+
+    background:#0b5394;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 25px;
+
+    border-radius:5px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+}
+
+
+/* Hover Effect */
+
+button:hover{
+
+    background:#083d6d;
+
+}
+
+
+/* ===========================
+   Score Box
+=========================== */
+
+.score{
+
+    font-size:45px;
+
+    color:green;
+
+    font-weight:bold;
+
+}
+
+
+/* ===========================
+   Recommendation Box
+=========================== */
+
+.recommendation{
+
+    font-size:30px;
+
+    color:#ff6600;
+
+    font-weight:bold;
+
+}

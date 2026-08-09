@@ -1,0 +1,27 @@
+b) Step 3 : job_description.txt Create this file in the project folder.
+Python Developer
+
+Required Skills
+
+Python
+
+Flask
+
+Machine Learning
+
+SQL
+
+Git
+
+HTML
+
+CSS
+
+REST API
+
+Communication Skills
+
+Problem Solving
+
+Team Work
+
