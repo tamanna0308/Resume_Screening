@@ -71,25 +71,23 @@ This project addresses these challenges by delivering an automated end-to-end AI
 ## 📁 Project Structure
 
 ```
-ai-resume-screening/
+Folder Structure
+Resume_Screening_Project/
 │
-├── data/
-│   ├── raw_resumes/            # Sample input resumes (PDF/DOCX)
-│   ├── job_descriptions/       # Target job descriptions
-│   └── skills_dictionary.json  # Reference taxonomy of technical & soft skills
+├── app.py
+├── requirements.txt
+├── job_description.txt
 │
-├── src/
-│   ├── __init__.py
-│   ├── extractor.py            # PDF/DOCX text extraction engine
-│   ├── preprocessor.py         # Text cleaning, tokenization, lemmatization
-│   ├── parser.py               # Skill & entity extraction logic
-│   ├── matcher.py              # TF-IDF & Sentence-BERT similarity computation
-│   └── recommender.py          # Scoring logic and suitability decision engine
+├── templates/
+│      ├── index.html
+│      └── result.html
 │
-├── app.py                      # Streamlit / FastAPI application interface
-├── requirements.txt            # Python dependency requirements
-├── README.md                   # Project documentation
-└── setup.py                    # Module installation setup
+├── static/
+│      └── style.css
+│
+├── uploads/
+│
+└── resume.pdf 
 ```
 
 ---
@@ -105,21 +103,10 @@ git clone https://github.com/your-username/ai-resume-screening.git
 cd ai-resume-screening
 ```
 
-### 3. Create a Virtual Environment
-```bash
-# macOS/Linux
-python3 -m venv venv
-source venv/bin/activate
-
-# Windows
-python -m venv venv
-venv\Scripts\activate
-```
-
-### 4. Install Dependencies
+### 3. Install Dependencies
 ```bash
 pip install -r requirements.txt
-python -m spacy download en_core_web_sm
+
 ```
 
 ---
@@ -170,7 +157,3 @@ print(f"Missing Key Skills: {', '.join(result['missing_skills'])}")
 - [ ] LLM-powered candidate interview question generator based on resume gaps.
 
 ---
-
-## 📜 License
-
-This project is open source and available under the [MIT License](LICENSE).
