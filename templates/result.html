@@ -1,63 +1,246 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-    <title>Prediction Result</title>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Resume Analysis Result | ResumeAI</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
 
 </head>
 
+
 <body>
 
-<div class="container">
 
-    <h1>Resume Screening Result</h1>
+<!-- ================= NAVBAR ================= -->
 
-    <!-- Match Percentage -->
+<header class="navbar">
 
-    <h2>
+    <div class="logo">
 
-        Resume Match Score
+        <span class="logo-icon">✦</span>
 
-    </h2>
-
-    <div class="score">
-
-        {{ score }} %
+        ResumeAI
 
     </div>
 
-    <!-- Recommendation -->
 
-    <h2>
+    <nav>
 
-        Recommendation
+        <a href="/">Home</a>
 
-    </h2>
+        <a href="/#features">Features</a>
 
-    <div class="recommendation">
+        <a href="/#how-it-works">How It Works</a>
 
-        {{ recommendation }}
+    </nav>
 
-    </div>
 
-    <br>
-
-    <a href="/">
-
-        <button>
-
-            Check Another Resume
-
-        </button>
-
+    <a href="/" class="nav-button">
+        Analyze Another
     </a>
 
+</header>
+
+
+
+<!-- ================= RESULT PAGE ================= -->
+
+<div class="skills-result">
+
+
+
+        {% for skill in matched_skills %}
+
+      
+        {% endfor %}
+
+    </div>
+
 </div>
+
+
+    <!-- ================= SCORE CARD ================= -->
+
+    <section class="result-card">
+
+
+        <div class="score-section">
+
+
+            <div class="score-circle">
+
+                <div class="score-number">
+
+                    {{ score }}<span>%</span>
+
+                </div>
+
+                <div class="score-label">
+
+                    MATCH
+
+                </div>
+
+            </div>
+
+
+            <div class="score-info">
+
+                <div class="result-tag">
+                    ✓ AI ANALYSIS
+                </div>
+
+
+                <h2>
+                    Resume Match Score
+                </h2>
+
+
+                <p>
+
+                    This score represents how well your
+                    resume matches the job requirements
+                    based on the analysis.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= RECOMMENDATION ================= -->
+
+        <div class="recommendation-section">
+
+
+            <div class="recommendation-heading">
+
+                <div class="recommendation-icon">
+                    ✦
+                </div>
+
+
+                <div>
+
+                    <span>
+                        AI INSIGHT
+                    </span>
+
+                    <h2>
+                        Recommendation
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="recommendation-box">
+
+                {{ recommendation }}
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================= ACTION ================= -->
+
+        <div class="result-actions">
+
+            <a href="/" class="primary-result-button">
+
+                ← Analyze Another Resume
+
+            </a>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================= NEXT STEP ================= -->
+
+    <section class="next-step">
+
+        <div>
+
+            <span class="eyebrow">
+                ✦ NEXT STEP
+            </span>
+
+            <h2>
+                Keep improving your profile.
+            </h2>
+
+            <p>
+
+                Use your AI insights to strengthen your
+                resume and find better career opportunities.
+
+            </p>
+
+        </div>
+
+
+        <a href="/" class="secondary-button">
+
+            Analyze Again →
+
+        </a>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-logo">
+
+        <span>✦</span>
+
+        ResumeAI
+
+    </div>
+
+
+    <p>
+
+        AI-powered resume screening and
+        job recommendations.
+
+    </p>
+
+
+    <small>
+
+        © 2026 ResumeAI
+
+    </small>
+
+</footer>
+
 
 </body>
 
 </html>
+```

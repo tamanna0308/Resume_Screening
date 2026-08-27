@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,46 +6,547 @@
 
     <meta charset="UTF-8">
 
-    <title>AI Resume Screening System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Link CSS File -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>ResumeAI | AI Resume Analyzer</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
 
 </head>
 
+
 <body>
 
-    <!-- Main Container -->
-    <div class="container">
 
-        <h1>AI Resume Screening & Job Recommendation</h1>
+<!-- ================= NAVBAR ================= -->
 
-        <p>
-            Upload your resume in PDF format and check how well it matches
-            the Job Description using Artificial Intelligence.
+<header class="navbar">
+
+    <div class="logo">
+        <span class="logo-icon">✦</span>
+        ResumeAI
+    </div>
+
+    <nav>
+
+        <a href="#home">Home</a>
+
+        <a href="#features">Features</a>
+
+        <a href="#how-it-works">How It Works</a>
+
+    </nav>
+
+    
+</header>
+
+
+
+<!-- ================= HERO ================= -->
+
+<main id="home">
+
+<section class="hero">
+
+
+    <!-- LEFT CONTENT -->
+
+    <div class="hero-left">
+
+        <div class="eyebrow">
+            <span>✦</span>
+            AI-POWERED RESUME ANALYSIS
+        </div>
+
+
+        <h1>
+            Your Resume.
+            <br>
+            <span>Smarter Career.</span>
+        </h1>
+
+
+        <p class="hero-text">
+
+            Upload your resume and let AI analyze your
+            skills, evaluate your profile, and discover
+            job opportunities that match your potential.
+
         </p>
 
-        <!-- Resume Upload Form -->
-        <form action="/predict" method="POST" enctype="multipart/form-data">
 
-            <label>Select Resume (PDF)</label>
+        <!-- UPLOAD BOX -->
+
+        <div class="upload-box" id="upload">
+
+    <div class="upload-top">
+
+        <div class="upload-symbol">
+            ↑
+        </div>
+
+        <div>
+            <h3>Upload your resume</h3>
+            <p>PDF format • Maximum 10MB</p>
+        </div>
+
+    </div>
+
+
+    <form
+        action="/predict"
+        method="POST"
+        enctype="multipart/form-data"
+        id="resume-form">
+
+        <!-- File selection area -->
+        <label class="choose-file" id="choose-file">
+
+            <div class="file-content">
+
+                <span class="file-icon" id="file-icon">
+                    📄
+                </span>
+
+                <span id="file-name">
+                    Choose PDF Resume
+                </span>
+
+            </div>
 
             <input
                 type="file"
                 name="resume"
+                id="resume-file"
                 accept=".pdf"
                 required>
 
-            <br><br>
+        </label>
 
-            <button type="submit">
-                Check Resume Score
-            </button>
 
-        </form>
+        <!-- Selected file information -->
+        <div class="selected-file" id="selected-file">
+
+            <span class="success-icon">✓</span>
+
+            <div class="selected-info">
+
+                <strong id="selected-file-name">
+                    Resume selected
+                </strong>
+
+                <small id="selected-file-size">
+                    Ready for analysis
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <button type="submit">
+
+            Analyze My Resume
+
+            <span>→</span>
+
+        </button>
+
+    </form>
+
+</div>
+
+
+
+
+        <div class="trust-line">
+
+            <span>✓</span>
+            AI-powered analysis
+
+            <span>✓</span>
+            Fast results
+
+            <span>✓</span>
+            Easy to use
+
+        </div>
 
     </div>
 
-</body>
 
+
+    <!-- RIGHT VISUAL -->
+
+    <div class="hero-right">
+
+        <div class="image-container">
+
+            <div class="glow"></div>
+
+            <img
+                src="{{ url_for(
+                    'static',
+                    filename='images/resume-ai.jpg'
+                ) }}"
+                alt="AI Resume Analysis">
+
+        </div>
+
+
+        <!-- Floating score card -->
+
+        <div class="floating-card score-card">
+
+            <div class="mini-icon">
+                ✓
+            </div>
+
+            <div>
+
+                <span>Resume Analyzer</span>
+
+                <p>Check Your Score</pp>
+
+            </div>
+
+        </div>
+
+
+        <!-- Floating AI card -->
+
+        <div class="floating-card ai-card">
+
+            <span class="ai-dot"></span>
+
+            AI Analysis
+
+            <strong>Ready</strong>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ================= FEATURES ================= -->
+
+<section class="features" id="features">
+
+
+    <div class="section-header">
+
+        <div class="eyebrow">
+            ✦ POWERFUL FEATURES
+        </div>
+
+        <h2>
+            Everything you need to
+            <span>stand out.</span>
+        </h2>
+
+        <p>
+            Turn your resume into actionable career insights.
+        </p>
+
+    </div>
+
+
+
+    <div class="feature-grid">
+
+
+        <!-- CARD 1 -->
+
+        <article class="feature-card">
+
+            <div class="feature-image">
+
+                <img
+                    src="{{ url_for(
+                        'static',
+                        filename='images/lucid-origin_A_digital_illustration_depicting_AI_resume_analysis_featuring_a_sleek_futuristic-0.jpg'
+                    ) }}"
+                    alt="AI Resume Analysis">
+
+            </div>
+
+
+            <div class="feature-content">
+
+                <div class="feature-number">
+                    01
+                </div>
+
+                <h3>
+                    AI Resume Analysis
+                </h3>
+
+                <p>
+                    Analyze your resume and understand
+                    how closely your skills match the
+                    requirements of a job.
+                </p>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- CARD 2 -->
+
+        <article class="feature-card">
+
+            <div class="feature-image">
+
+                <img
+                    src="{{ url_for(
+                        'static',
+                        filename='images/lucid-origin_updated_prompt_Create_a_visually_engaging_image_illustrating_a_job_recommendatio-0.jpg'
+                    ) }}"
+                    alt="Job Recommendations">
+
+            </div>
+
+
+            <div class="feature-content">
+
+                <div class="feature-number">
+                    02
+                </div>
+
+                <h3>
+                    Job Recommendations
+                </h3>
+
+                <p>
+                    Discover career roles that align with
+                    your skills, experience and profile.
+                </p>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- CARD 3 -->
+
+<article class="feature-card">
+
+            <div class="feature-image">
+
+                <img
+                    src="{{ url_for(
+                        'static',
+                        filename='images/lucid-origin_A_digital_illustration_depicting_AI-powered_job_suggestions._The_central_subject-0.jpg'
+                    ) }}"
+                    alt="Job Recommendations">
+
+
+            </div>
+
+
+            <div class="feature-content">
+
+                <div class="feature-number">
+                    03
+                </div>
+                
+                <h3>
+                    Smart Suggestions
+                </h3>
+
+                <p>
+                    Identify areas where your resume can
+                    be improved and make it stronger.
+                </p>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= HOW IT WORKS ================= -->
+
+<section class="process" id="how-it-works">
+
+
+    <div class="section-header">
+
+        <div class="eyebrow">
+            ✦ SIMPLE PROCESS
+        </div>
+
+        <h2>
+            From resume to insights
+            <span>in three steps.</span>
+        </h2>
+
+    </div>
+
+
+
+    <div class="process-grid">
+
+
+        <div class="process-item">
+
+            <div class="process-number">
+                01
+            </div>
+
+            <h3>
+                Upload
+            </h3>
+
+            <p>
+                Upload your resume as a PDF.
+            </p>
+
+        </div>
+
+
+
+        <div class="process-line"></div>
+
+
+
+        <div class="process-item">
+
+            <div class="process-number">
+                02
+            </div>
+
+            <h3>
+                Analyze
+            </h3>
+
+            <p>
+                Our AI evaluates your resume.
+            </p>
+
+        </div>
+
+
+
+        <div class="process-line"></div>
+
+
+
+        <div class="process-item">
+
+            <div class="process-number">
+                03
+            </div>
+
+            <h3>
+                Improve
+            </h3>
+
+            <p>
+                Get your score and recommendations.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-logo">
+        <span>✦</span>
+        ResumeAI
+    </div>
+
+    <p>
+        AI-powered resume screening and job recommendations.
+    </p>
+
+    <small>
+        © 2026 ResumeAI
+    </small>
+
+</footer>
+
+
+</body>
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const resumeInput = document.getElementById("resume-file");
+
+    const fileName = document.getElementById("file-name");
+
+    const fileIcon = document.getElementById("file-icon");
+
+    const selectedFile = document.getElementById("selected-file");
+
+    const selectedFileName =
+        document.getElementById("selected-file-name");
+
+    const selectedFileSize =
+        document.getElementById("selected-file-size");
+
+
+    resumeInput.addEventListener("change", function () {
+
+        if (this.files && this.files.length > 0) {
+
+            const file = this.files[0];
+
+
+            /* Show file name in upload box */
+
+            fileName.textContent = file.name;
+
+            fileIcon.textContent = "📄";
+
+
+            /* Show selected-file card */
+
+            selectedFile.style.display = "flex";
+
+
+            selectedFileName.textContent = file.name;
+
+
+            /* Convert bytes to KB */
+
+            const fileSizeKB =
+                (file.size / 1024).toFixed(1);
+
+
+            selectedFileSize.textContent =
+                fileSizeKB + " KB • Ready for analysis";
+
+
+        }
+
+    });
+
+});
+
+</script>
 </html>

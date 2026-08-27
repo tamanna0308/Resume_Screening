@@ -1,6 +1,6 @@
 # ======================================================
 # AI Resume Screening Project
-# Developed using Flask + Machine Learning
+# Developed using Flask + Skill Matching
 # ======================================================
 
 # Import Flask libraries
@@ -11,10 +11,6 @@ import os
 
 # Library to read PDF files
 import PyPDF2
-
-# Machine Learning Libraries
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
 
 
 # ------------------------------------------------------
@@ -38,6 +34,7 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 # ------------------------------------------------------
 
 if not os.path.exists(UPLOAD_FOLDER):
+
     os.makedirs(UPLOAD_FOLDER)
 
 
@@ -46,6 +43,7 @@ if not os.path.exists(UPLOAD_FOLDER):
 # ------------------------------------------------------
 
 def extract_text_from_pdf(pdf_path):
+
     """
     Reads every page from a PDF file
     and returns complete text.
@@ -57,14 +55,13 @@ def extract_text_from_pdf(pdf_path):
 
         reader = PyPDF2.PdfReader(pdf_file)
 
-        # Loop through all pages
-
         for page in reader.pages:
 
             page_text = page.extract_text()
 
             if page_text:
-                text += page_text
+
+                text += page_text + "\n"
 
     return text
 
@@ -75,39 +72,93 @@ def extract_text_from_pdf(pdf_path):
 
 def read_job_description():
 
-    with open("job_description.txt", "r", encoding="utf-8") as file:
+    with open(
+        "job_description.txt",
+        "r",
+        encoding="utf-8"
+    ) as file:
 
         return file.read()
 
 
 # ------------------------------------------------------
-# Function for Prediction
+# Function to Calculate Resume Match
 # ------------------------------------------------------
 
 def calculate_similarity(resume_text, job_text):
 
     """
-    Convert text into vectors using TF-IDF
-    Calculate Cosine Similarity
+    Calculate resume match based on required skills.
     """
 
-    documents = [resume_text, job_text]
+    # Convert resume text to lowercase
+    resume_text = resume_text.lower()
 
-    # Convert text into numerical vectors
+    # Convert job description to lowercase
+    job_text = job_text.lower()
 
-    tfidf = TfidfVectorizer()
 
-    matrix = tfidf.fit_transform(documents)
+    # --------------------------------------------------
+    # Required Skills
+    # --------------------------------------------------
 
-    # Calculate Similarity
+    required_skills = [
 
-    similarity = cosine_similarity(matrix[0:1], matrix[1:2])
+        "python",
 
-    # Convert into Percentage
+        "flask",
 
-    score = similarity[0][0] * 100
+        "machine learning",
 
-    return round(score, 2)
+        "sql",
+
+        "git",
+
+        "html",
+
+        "css",
+
+        "rest api",
+
+        "communication skills",
+
+        "problem solving",
+
+        "team work"
+
+    ]
+
+
+    # --------------------------------------------------
+    # Find Matching Skills
+    # --------------------------------------------------
+
+    matched_skills = []
+
+
+    for skill in required_skills:
+
+        if skill in resume_text:
+
+            matched_skills.append(skill)
+
+
+    # --------------------------------------------------
+    # Calculate Score
+    # --------------------------------------------------
+
+    total_skills = len(required_skills)
+
+    matched_count = len(matched_skills)
+
+
+    score = (
+        matched_count /
+        total_skills
+    ) * 100
+
+
+    return round(score, 2), matched_skills
 
 
 # ------------------------------------------------------
@@ -118,48 +169,80 @@ def calculate_similarity(resume_text, job_text):
 
 def home():
 
-    return render_template("index.html")
+    return render_template(
+        "index.html"
+    )
 
 
 # ------------------------------------------------------
 # Prediction Route
 # ------------------------------------------------------
 
-@app.route("/predict", methods=["POST"])
+@app.route(
+    "/predict",
+    methods=["POST"]
+)
 
 def predict():
 
-    # Check whether user uploaded file
+    # --------------------------------------------------
+    # Check Whether User Uploaded File
+    # --------------------------------------------------
 
     if "resume" not in request.files:
 
         return "No Resume Uploaded"
 
+
     file = request.files["resume"]
+
 
     if file.filename == "":
 
         return "Please Select Resume"
 
-    # Save Resume
 
-    filepath = os.path.join(app.config["UPLOAD_FOLDER"], file.filename)
+    # --------------------------------------------------
+    # Save Resume
+    # --------------------------------------------------
+
+    filepath = os.path.join(
+        app.config["UPLOAD_FOLDER"],
+        file.filename
+    )
 
     file.save(filepath)
 
+
+    # --------------------------------------------------
     # Read Resume
+    # --------------------------------------------------
 
-    resume_text = extract_text_from_pdf(filepath)
+    resume_text = extract_text_from_pdf(
+        filepath
+    )
 
+
+    # --------------------------------------------------
     # Read Job Description
+    # --------------------------------------------------
 
     job_text = read_job_description()
 
+
+    # --------------------------------------------------
     # Calculate Match Score
+    # --------------------------------------------------
 
-    score = calculate_similarity(resume_text, job_text)
+    score, matched_skills = calculate_similarity(
+        resume_text,
+        job_text
+    )
 
+
+    # --------------------------------------------------
     # Recommendation Logic
+    # --------------------------------------------------
 
     if score >= 80:
 
@@ -177,12 +260,21 @@ def predict():
 
         recommendation = "Poor Match"
 
-    # Send Results to HTML Page
+
+    # --------------------------------------------------
+    # Send Results to HTML
+    # --------------------------------------------------
 
     return render_template(
+
         "result.html",
+
         score=score,
-        recommendation=recommendation
+
+        recommendation=recommendation,
+
+        matched_skills=matched_skills
+
     )
 
 
@@ -192,4 +284,6 @@ def predict():
 
 if __name__ == "__main__":
 
-    app.run(debug=True)
+    app.run(
+        debug=True
+    )
